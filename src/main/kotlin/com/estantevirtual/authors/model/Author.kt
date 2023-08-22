@@ -1,23 +1,18 @@
 package com.estantevirtual.authors.model
 
-import lombok.Getter
-import lombok.Setter
+import lombok.Data
+import java.util.*
 import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
 import javax.persistence.Id
-import javax.persistence.ManyToMany
+import javax.validation.constraints.NotNull
 
 @Entity
-@Getter
-@Setter
-class Author {
+@Data
+data class Author(
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    var id: Long? = null
-    var firstName: String? = null
-    var lastName: String? = null
-
-    @ManyToMany(mappedBy = "author")
-    var books: Set<Book>? = null
-}
+    var id: UUID? = null,
+    @field:NotNull(message = "First name is required")
+    var firstName: String?,
+    @field:NotNull(message = "Last name is required")
+    var lastName: String?
+)
